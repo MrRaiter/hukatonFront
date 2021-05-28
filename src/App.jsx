@@ -1,11 +1,14 @@
-import ButtonAppBar from './components/button-app-bar/ButtonAppBar';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
+import ButtonAppBar from './navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header" />
       <ButtonAppBar />
-      <h1>Stephan</h1>
+      <Router>
+        <Switch />
+      </Router>
     </div>
   );
 }
