@@ -3,7 +3,7 @@
 
 #auth-container {
     min-height: 100vh;
-    background-color: $bg-main;
+    background-color: $primary;
 
     #auth-card {
         display: flex;
@@ -24,7 +24,7 @@
             }
 
             #image-section {
-                background-color: $bg-light;
+                background-color: $secondary;
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
                 border-bottom-left-radius: 0;
@@ -73,7 +73,7 @@
                     button {
                         width: 100%;
                         height: 30px;
-                        background-color: $bg-main;
+                        background-color: $primary;
                         border: none;
                         color: white;
                         cursor: pointer;
