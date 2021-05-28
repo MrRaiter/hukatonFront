@@ -1,4 +1,4 @@
-import ButtonAppBar from './navbar/Navbar';
+import ButtonAppBar from './components/button-app-bar/ButtonAppBar';
 
 function App() {
   return (
