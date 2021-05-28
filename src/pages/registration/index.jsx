@@ -89,14 +89,14 @@ const SignUp = () => {
             <form onSubmit={submitHanlder}>
               <div className="input-field mb-1">
                 <input
-                  placeholder="first name"
+                  placeholder="First name"
                   name="firstname"
                   onChange={inputHandler}
                 />
               </div>
               <div className="input-field mb-1">
                 <input
-                  placeholder="last name"
+                  placeholder="Last name"
                   name="lastname"
                   onChange={inputHandler}
                 />
@@ -107,8 +107,8 @@ const SignUp = () => {
                 )}
                 <input
                   onBlur={(e) => blurHandle(e)}
-                  placeholder="login"
-                  name="email"
+                  placeholder="Login"
+                  name="login"
                   onChange={inputHandler}
                 />
               </div>
@@ -118,7 +118,7 @@ const SignUp = () => {
                 )}
                 <input
                   onBlur={(e) => blurHandle(e)}
-                  placeholder="password"
+                  placeholder="Password"
                   type="password"
                   name="password"
                   onChange={inputHandler}
