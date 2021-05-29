@@ -16,13 +16,25 @@ import './App.scss';
 
 function App() {
   return (
-    <div className="App">
+    <div
+      className={`App ${
+        !['/login', '/signup', '/'].includes(location.pathname)
+          ? 'with-sidebar'
+          : ''
+      }`}
+    >
       <NotificationContainer />
       <Router>
         {!['/login', '/signup', '/'].includes(location.pathname) ? (
           <ButtonAppBar />
         ) : null}
-        <div className="content">
+        <div
+          className={`${
+            !['/login', '/signup', '/'].includes(location.pathname)
+              ? 'content'
+              : ''
+          }`}
+        >
           <Switch>
             <Route exact path="/" component={LoginPage} />
             <Route exact path="/login" component={LoginPage} />

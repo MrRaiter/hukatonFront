@@ -7,8 +7,11 @@ body {
 }
 
 .App {
-  display: flex;
     height: 100vh;
+}
+
+.with-sidebar {
+  display: flex;
 }
 
 .pro-sidebar {
