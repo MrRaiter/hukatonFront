@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import './assets/scss/_variables';
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "./assets/scss/_variables";
+@import "./assets/scss/resets";
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .container {
@@ -47,10 +48,10 @@ body {
   font-weight: 600;
 
   &:hover {
-      background-color: $secondary;
+    background-color: $secondary;
   }
 
   &.active {
-      background-color: $thirdly;
+    background-color: $thirdly;
   }
 }

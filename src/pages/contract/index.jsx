@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { contracts } from '../../constants/contracts';
 
-const ContractsPage = () => {
+const ContractPage = () => {
   const { id } = useParams();
   return (
     <div>
@@ -11,4 +11,4 @@ const ContractsPage = () => {
   );
 };
 
-export default ContractsPage;
+export default ContractPage;

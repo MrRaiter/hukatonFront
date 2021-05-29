@@ -25,5 +25,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-unused-vars': 'off',
     'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'object-curly-newline': 'off',
   },
 };
