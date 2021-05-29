@@ -1,6 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import ContractList from '../../components/contract-list';
+import ModalContract from '../../components/modal-contract';
 import './company.scss';
 
 const test = [
@@ -42,7 +43,14 @@ const test = [
 ];
 
 const CompanyPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [list, setList] = useState('orders');
+  const [contract, setContract] = useState({});
+
+  const handleChangeContract = (e) => {
+    setContract({ ...contract, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="container">
       <div className="header">
@@ -75,7 +83,9 @@ const CompanyPage = () => {
         </div>
         <div className="right-block">
           <div className="add-btn">
-            <button className="btn">Add Contract</button>
+            <button className="btn" onClick={() => setIsModalOpen(true)}>
+              Add Contract
+            </button>
           </div>
           <div className="description">
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -107,6 +117,12 @@ const CompanyPage = () => {
       <div className="contracts">
         <ContractList list={test} />
       </div>
+      <ModalContract
+        handleOpen={setIsModalOpen}
+        open={isModalOpen}
+        headerText="Add contract"
+        inputHandler={handleChangeContract}
+      />
     </div>
   );
 };
