@@ -17,19 +17,24 @@ function App() {
   return (
     <div className="App">
       <NotificationContainer />
-      <header className="App-header" />
       <Router>
         {!['/login', '/signup', '/'].includes(location.pathname) ? (
           <ButtonAppBar />
         ) : null}
-        <Switch>
-          <Route exact path="/" component={LoginPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={RegistrationPage} />
-          <Route exact path="/add-company" component={AddCompany} />
-          <Route exact path="/dashboard" component={ProfilePage} />
-          <Route exact path="/dashboard/contracts" component={ContractsPage} />
-        </Switch>
+        <div className="content">
+          <Switch>
+            <Route exact path="/" component={LoginPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/signup" component={RegistrationPage} />
+            <Route exact path="/add-company" component={AddCompany} />
+            <Route exact path="/dashboard" component={ProfilePage} />
+            <Route
+              exact
+              path="/dashboard/contracts"
+              component={ContractsPage}
+            />
+          </Switch>
+        </div>
       </Router>
     </div>
   );

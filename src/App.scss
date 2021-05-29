@@ -11,6 +11,14 @@ body {
     height: 100vh;
 }
 
+.pro-sidebar {
+  position: fixed;
+}
+
+.content {
+  margin-left: 270px
+}
+
 .container {
     padding: 24px;
     flex-grow: 1;
