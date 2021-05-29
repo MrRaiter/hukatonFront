@@ -4,9 +4,9 @@ import ButtonAppBar from './components/button-app-bar';
 import LoginPage from './pages/login';
 import AddCompany from './pages/add-company';
 import RegistrationPage from './pages/registration';
+import Dashboard from './pages/dashboard';
 
 import './App.scss';
-import CompanyPage from './pages/company';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={RegistrationPage} />
           <Route exact path="/add-company" component={AddCompany} />
-          <Route exact path="/company" component={CompanyPage} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </div>

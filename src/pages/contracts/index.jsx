@@ -31,6 +31,10 @@ const ContractsPage = () => (
               image={contract.image}
               title={contract.title}
               description={contract.description}
+              buttonTitle="Read Full Overview"
+              onClick={() => {
+                console.log('Click');
+              }}
             />
           </Grid>
         ))}

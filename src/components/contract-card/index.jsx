@@ -14,7 +14,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ContractCard({ image, title, description }) {
+export default function ContractCard({
+  image,
+  title,
+  description,
+  buttonTitle,
+  onClick,
+}) {
   const classes = useStyles();
 
   return (
@@ -34,8 +40,8 @@ export default function ContractCard({ image, title, description }) {
       </CardContent>
 
       <CardActions>
-        <Button size="small" color="primary">
-          Read Full Overview
+        <Button size="small" color="primary" onClick={onClick}>
+          {buttonTitle}
         </Button>
       </CardActions>
     </Card>
