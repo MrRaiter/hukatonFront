@@ -84,7 +84,7 @@ const SignUp = () => {
             <img src={SignUpImage} alt="Login" />
           </div>
           <div id="form-section">
-            <h4>Registration</h4>
+            <h4>Add company</h4>
 
             <form onSubmit={submitHanlder}>
               <div className="input-field mb-1">

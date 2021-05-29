@@ -3,6 +3,7 @@ import ButtonAppBar from './components/button-app-bar';
 import LoginPage from './pages/login';
 import AddCompany from './pages/add-company';
 import RegistrationPage from './pages/registration';
+import CompanyPage from './pages/company';
 import './App.scss';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={RegistrationPage} />
           <Route exact path="/add-company" component={AddCompany} />
+          <Route exact path="/profile" component={CompanyPage} />
         </Switch>
       </Router>
     </div>
