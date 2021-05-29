@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { Box, Container, Typography } from '@material-ui/core';
 import axios from 'axios';
 import { contracts } from '../../constants/contracts';
-import ContractCard from '../../components/contract-card';
+import ContractCard from '../../components/company-card';
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
