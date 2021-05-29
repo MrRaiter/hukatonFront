@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const PrivateRoute = ({ children, ...rest }) => {
   let token = localStorage.getItem('token');
-  console.log(token);
   axios.defaults.headers.common.authorization = token || '';
 
   if (token === 'undefined' || !token) {
