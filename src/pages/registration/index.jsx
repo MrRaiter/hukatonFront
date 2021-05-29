@@ -57,6 +57,10 @@ const SignUp = () => {
     getApi();
   }, []);
 
+  useEffect(() => {
+    getApi();
+  }, []);
+
   const blurHandle = (e) => {
     switch (e.target.name) {
       case 'email':

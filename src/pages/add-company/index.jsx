@@ -3,13 +3,12 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable indent */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { NotificationManager } from 'react-notifications';
 import SignUpImage from '../../assets/images/add-comany.svg';
 import 'react-notifications/lib/notifications.css';
 import '../login/auth.scss';
-// useEffect
+
 const SignUp = () => {
   const [emailDirty, setEmaiDirty] = useState(false);
   const [PasswordDirty, setPasswordDirty] = useState(false);

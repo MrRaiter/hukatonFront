@@ -90,10 +90,6 @@ const LoginPage = () => {
     }
   };
 
-  // if (isLoggedIn) {
-  //   return <Redirect to="/notes" />;
-  // }
-
   return (
     <div id="auth-container">
       <div id="auth-card">
