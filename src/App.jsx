@@ -6,7 +6,8 @@ import LoginPage from './pages/login';
 import AddCompany from './pages/add-company';
 import RegistrationPage from './pages/registration';
 import PrivateRoute from './components/private-route';
-import CompanyPage from './pages/company';
+import Dashboard from './pages/dashboard';
+
 import './App.scss';
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={RegistrationPage} />
-          <PrivateRoute exact path="/add-company" component={AddCompany} />
-          <PrivateRoute exact path="/profile" component={CompanyPage} />
+          <Route exact path="/add-company" component={AddCompany} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </div>
