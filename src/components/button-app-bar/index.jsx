@@ -1,45 +1,48 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+/* eslint-disable no-unused-vars */
+/* eslint-disable object-curly-newline */
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarContent,
+} from 'react-pro-sidebar';
+import { Link } from 'react-router-dom';
+import 'react-pro-sidebar/dist/css/styles.css';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SearchIcon from '@material-ui/icons/Search';
 
 export default function ButtonAppBar() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <ProSidebar>
+      <SidebarHeader />
+      <SidebarContent>
+        <Menu iconShape="square">
+          <SubMenu title="Dashboard" icon={<DashboardIcon />}>
+            <MenuItem>
+              Company
+              <Link to="/dashboard" />
+            </MenuItem>
+            <MenuItem>
+              My contracts
+              <Link to="/dashboard/contracts" />
+            </MenuItem>
+            <MenuItem>
+              Orders
+              <Link to="/dashboard" />
+            </MenuItem>
+          </SubMenu>
+        </Menu>
+        <Menu iconShape="square">
+          <SubMenu title="Browse" icon={<SearchIcon />}>
+            <MenuItem>Contracts</MenuItem>
+            <MenuItem>Companies</MenuItem>
+          </SubMenu>
+        </Menu>
+      </SidebarContent>
+      <SidebarFooter />
+    </ProSidebar>
   );
 }

@@ -48,7 +48,6 @@ const Dashboard = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log('PATH', path, url);
   return (
     <TabContext>
       <Container>
