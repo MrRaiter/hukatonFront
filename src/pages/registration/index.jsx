@@ -4,8 +4,12 @@
 /* eslint-disable indent */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import SignUpImage from '../../assets/images/register.svg';
 import '../login/auth.scss';
+
+const companies = [{ title: 'aqweqw' }, { title: 'wewetew' }];
 
 const SignUp = () => {
   const [emailDirty, setEmaiDirty] = useState(false);
@@ -122,6 +126,24 @@ const SignUp = () => {
                   type="password"
                   name="password"
                   onChange={inputHandler}
+                />
+              </div>
+              <div className="input-field mb-2">
+                <Autocomplete
+                  freeSolo
+                  id="free-solo-2-demo"
+                  disableClearable
+                  options={companies.map((option) => option.title)}
+                  renderInput={(params) => (
+                    <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      {...params}
+                      label="Search input"
+                      margin="normal"
+                      variant="outlined"
+                      InputProps={{ ...params.InputProps, type: 'search' }}
+                    />
+                  )}
                 />
               </div>
               <button disabled={!isFormValid}>Register</button>
