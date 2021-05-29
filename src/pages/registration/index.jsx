@@ -1,15 +1,17 @@
+/* eslint-disable consistent-return */
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable comma-dangle */
 /* eslint-disable react/button-has-type */
 /* eslint-disable operator-linebreak */
 /* eslint-disable indent */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import axios from 'axios';
 import SignUpImage from '../../assets/images/register.svg';
-import '../login/auth.scss';
 
-const companies = [{ title: 'aqweqw' }, { title: 'wewetew' }];
+import '../login/auth.scss';
 
 const SignUp = () => {
   const [emailDirty, setEmaiDirty] = useState(false);
@@ -18,14 +20,15 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(
     'password less than 8 symbols !'
   );
-  const [isFormValid, setIsFormValid] = useState(false);
+  const history = useHistory();
+  const [companies, setCompanies] = useState([]);
   const [user, setUser] = useState({
     email: '',
     password: '',
     firstname: '',
     lastname: '',
+    company_id: '',
   });
-
   const inputHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     if (e.target.name === 'email') {
@@ -44,13 +47,15 @@ const SignUp = () => {
     }
   };
 
-  useEffect(() => {
-    if (emailError || passwordError) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
+  const getApi = async () => {
+    const company = await axios.get(`${process.env.REACT_APP_BACKEND}company`);
+    if (company.data) {
+      setCompanies(company.data);
     }
-  }, [emailError, passwordError]);
+  };
+  useEffect(() => {
+    getApi();
+  }, []);
 
   const blurHandle = (e) => {
     switch (e.target.name) {
@@ -64,21 +69,30 @@ const SignUp = () => {
         break;
     }
   };
+  const setTokens = (data) => {
+    localStorage.setItem('token', JSON.stringify(data.authorization));
+    localStorage.setItem('user', JSON.stringify(data.user));
+  };
+  const defaultAxios = async (data) => {
+    const { authorization } = data;
 
+    axios.defaults.headers.common.authorization = authorization
+      ? JSON.parse(`"${authorization}"`)
+      : '';
+  };
   const submitHanlder = async (e) => {
     e.preventDefault();
 
-    // try {
-    //   if (!user.email || !user.password) {
-    //     console.log('error');
-    //   }
-
-    //   const res = await signUp(user);
-    // } catch (error) {}
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND}signup`,
+      user
+    );
+    if (response) {
+      setTokens(response.data);
+      defaultAxios(response.data);
+      history.push('/profile');
+    }
   };
-  //   if (isLoggedIn) {
-  //     return <Redirect to="/notes" />;
-  //   }
 
   return (
     <div id="auth-container">
@@ -111,8 +125,8 @@ const SignUp = () => {
                 )}
                 <input
                   onBlur={(e) => blurHandle(e)}
-                  placeholder="Login"
-                  name="login"
+                  placeholder="Email"
+                  name="email"
                   onChange={inputHandler}
                 />
               </div>
@@ -133,7 +147,11 @@ const SignUp = () => {
                   freeSolo
                   id="free-solo-2-demo"
                   disableClearable
-                  options={companies.map((option) => option.title)}
+                  options={companies}
+                  getOptionLabel={(option) => option.title}
+                  onChange={(event, newValue) => {
+                    setUser({ ...user, company_id: newValue.id });
+                  }}
                   renderInput={(params) => (
                     <TextField
                       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -146,7 +164,7 @@ const SignUp = () => {
                   )}
                 />
               </div>
-              <button disabled={!isFormValid}>Register</button>
+              <button>Register</button>
             </form>
 
             <p className="redirect">

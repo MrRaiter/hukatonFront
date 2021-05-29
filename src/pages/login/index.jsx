@@ -1,6 +1,10 @@
+/* eslint-disable consistent-return */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import 'react-notifications/lib/notifications.css';
 import LoginImage from '../../assets/images/login.svg';
 import './auth.scss';
 
@@ -17,6 +21,8 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
+
+  const history = useHistory();
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -56,16 +62,37 @@ const LoginPage = () => {
     }
   };
 
-  const submitHanlder = async () => {
-    // e.preventDefault();
-    // try {
-    //   const res = await postLogin(user);
-    // } catch (error) {}
+  const setTokens = (data) => {
+    localStorage.setItem('token', JSON.stringify(data.authorization));
+    localStorage.setItem('user', JSON.stringify(data.user));
+    // setAuthTokens({ token: data.authorization, user: data.user });
+  };
+  const defaultAxios = async (data) => {
+    const { authorization } = data;
+
+    axios.defaults.headers.common.authorization = authorization
+      ? JSON.parse(`"${authorization}"`)
+      : '';
+  };
+  const submitHanlder = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND}login`, user,
+      );
+      if (response) {
+        setTokens(response.data);
+        defaultAxios(response.data);
+        history.push('/profile');
+      }
+    } catch (error) {
+      NotificationManager.error('Error');
+    }
   };
 
-  //   if (isLoggedIn) {
-  //     return <Redirect to="/notes" />;
-  //   }
+  // if (isLoggedIn) {
+  //   return <Redirect to="/notes" />;
+  // }
 
   return (
     <div id="auth-container">
