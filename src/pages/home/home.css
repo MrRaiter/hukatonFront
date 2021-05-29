@@ -1,0 +1,49 @@
+.upper-bar {
+    /* position: fixed; */
+    height: 65px;
+    width: 100%;
+}
+
+.line {
+    width: 100%;
+    display: flex;
+}
+
+.left-side {
+    width: 50%;
+    height: 200px;
+}
+
+.right-side {
+    width: 50%;
+    height: 200px;
+}
+
+.cardMediaHeight {
+    height: 200px;
+    width: 100%;
+    padding-top: 0px !important;
+    background-size: contain !important;
+    display: flex !important;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+ .text-block {
+     width: 60% !important;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+ }
+
+ .card-img{
+    height: 200px;
+}
+
+.img-block {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
