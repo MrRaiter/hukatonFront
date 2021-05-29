@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import './assets/scss/_variables';
 
 body {
   font-family: 'Roboto', sans-serif;
 }
 
-.App {
-  text-align: center;
+.container {
+  background-color: $background;
+  padding: 20px 20vh 0;
+  height: 100vh;
 }
 
 .card-shadow {
@@ -30,4 +33,24 @@ body {
 
 .mb-2 {
   margin-bottom: 2rem;
+}
+
+.btn {
+  border-radius: 5px;
+  margin-left: 10px;
+  width: 100px;
+  height: 30px;
+  background-color: $primary;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+
+  &:hover {
+      background-color: $secondary;
+  }
+
+  &.active {
+      background-color: $thirdly;
+  }
 }

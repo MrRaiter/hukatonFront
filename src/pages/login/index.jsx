@@ -84,7 +84,7 @@ const LoginPage = () => {
                 )}
                 <input
                   onBlur={(e) => blurHandle(e)}
-                  placeholder="login"
+                  placeholder="Login"
                   name="email"
                   onChange={inputHandler}
                 />
@@ -96,7 +96,7 @@ const LoginPage = () => {
 
                 <input
                   onBlur={(e) => blurHandle(e)}
-                  placeholder="password"
+                  placeholder="Password"
                   type="password"
                   name="password"
                   onChange={inputHandler}
