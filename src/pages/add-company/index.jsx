@@ -2,11 +2,14 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable operator-linebreak */
 /* eslint-disable indent */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { NotificationManager } from 'react-notifications';
 import SignUpImage from '../../assets/images/add-comany.svg';
+import 'react-notifications/lib/notifications.css';
 import '../login/auth.scss';
-
+// useEffect
 const SignUp = () => {
   const [emailDirty, setEmaiDirty] = useState(false);
   const [PasswordDirty, setPasswordDirty] = useState(false);
@@ -14,7 +17,6 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(
     'password less than 8 symbols !'
   );
-  const [isFormValid, setIsFormValid] = useState(false);
   const [user, setUser] = useState({
     email: '',
     phone: '',
@@ -40,14 +42,6 @@ const SignUp = () => {
     }
   };
 
-  useEffect(() => {
-    if (emailError || passwordError) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  }, [emailError, passwordError]);
-
   const blurHandle = (e) => {
     switch (e.target.name) {
       case 'email':
@@ -63,18 +57,14 @@ const SignUp = () => {
 
   const submitHanlder = async (e) => {
     e.preventDefault();
-
-    // try {
-    //   if (!user.email || !user.password) {
-    //     console.log('error');
-    //   }
-
-    //   const res = await signUp(user);
-    // } catch (error) {}
+    const company = await axios.post(
+      `${process.env.REACT_APP_BACKEND}company`,
+      user
+    );
+    if (company) {
+      NotificationManager.success('Company was created');
+    }
   };
-  //   if (isLoggedIn) {
-  //     return <Redirect to="/notes" />;
-  //   }
 
   return (
     <div id="auth-container">
@@ -119,7 +109,7 @@ const SignUp = () => {
                   onChange={inputHandler}
                 />
               </div>
-              <button disabled={!isFormValid}>Register</button>
+              <button>Register</button>
             </form>
 
             <p className="redirect">
