@@ -1,15 +1,42 @@
-const contracts = [
-  {
-    id: '1',
-    company_id: '1',
-    name: 'Техническое обслуживание Крымского моста',
-    type: 'Тяжелая Промышленность',
-    image: 'https://cdnimg.rg.ru/img/content/166/15/92/pn3L_bNwql0_d_850.jpg',
-    description:
-      'Техническое обслуживание Крымского моста, осуществление регламентного ремонта, укрепление конструкции',
-  },
-];
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
-const ContractsPage = () => <div>{contracts[0].name}</div>;
+import { Box, Container, Typography } from '@material-ui/core';
+import { contracts } from '../../constants/contracts';
+import ContractCard from '../../components/contract-card';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+const ContractsPage = () => (
+  <Container maxWidth="lg">
+    <Box my={4}>
+      <Typography variant="h2">Orders</Typography>
+    </Box>
+    <Box my={4}>
+      <Grid container spacing={4} alignContent="center">
+        {contracts.map((contract) => (
+          <Grid item xs={4}>
+            <ContractCard
+              image={contract.image}
+              title={contract.title}
+              description={contract.description}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  </Container>
+);
 
 export default ContractsPage;
