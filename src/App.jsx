@@ -10,6 +10,7 @@ import ContractPage from './pages/contract';
 import ContractsPage from './pages/contracts';
 import ProfilePage from './pages/profile';
 import Dashboard from './pages/dashboard';
+import Companies from './pages/companies';
 
 import './App.scss';
 
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/signup" component={RegistrationPage} />
             <Route exact path="/add-company" component={AddCompany} />
             <Route exact path="/dashboard" component={ProfilePage} />
+            <Route exact path="/companies" component={Companies} />
             <Route
               exact
               path="/dashboard/contracts"

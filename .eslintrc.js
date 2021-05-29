@@ -18,6 +18,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'linebreak-style': 0,
+    'import/no-unresolved': 'off',
     'react/react-in-jsx-scope': 'off',
     'prettier/prettier': ['error', { singleQuote: true, endOfLine: 'auto' }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
