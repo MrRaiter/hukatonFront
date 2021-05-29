@@ -111,14 +111,6 @@ const SignUp = () => {
               </div>
               <button>Register</button>
             </form>
-
-            <p className="redirect">
-              Already have an account?
-              {'  '}
-              <Link to="/login" style={{ marginLeft: '5px' }}>
-                Login
-              </Link>
-            </p>
           </div>
         </div>
       </div>
