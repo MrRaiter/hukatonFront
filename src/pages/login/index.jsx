@@ -136,12 +136,6 @@ const LoginPage = () => {
                 Register
               </Link>
             </p>
-            <p className="redirect">
-              Or add new company?
-              <Link to="/add-company" style={{ marginLeft: '5px' }}>
-                Add
-              </Link>
-            </p>
           </div>
         </div>
       </div>
