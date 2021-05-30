@@ -12,6 +12,8 @@ import ProfilePage from './pages/profile';
 import Dashboard from './pages/dashboard';
 import Companies from './pages/companies';
 import OrderPage from './pages/order';
+import Home from './pages/home';
+import Footer from './components/footer';
 
 import './App.scss';
 
@@ -37,7 +39,7 @@ function App() {
           }`}
         >
           <Switch>
-            <Route exact path="/" component={LoginPage} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={RegistrationPage} />
             <Route exact path="/add-company" component={AddCompany} />
@@ -53,6 +55,7 @@ function App() {
           </Switch>
         </div>
       </Router>
+      <Footer />
     </div>
   );
 }

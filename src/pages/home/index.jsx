@@ -20,18 +20,6 @@ import fastImg from '../../assets/images/fast.png';
 import simpImg from '../../assets/images/simp.png';
 import comfImg from '../../assets/images/comf.png';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        KEKW Admin
-      </Link>
-      {new Date().getFullYear()}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -68,7 +56,7 @@ const cards = [0, 1, 2];
 const data = [
   {
     head: 'Быстро',
-    img: fastImg,
+    img: comfImg,
     description:
       'Система проста, для получения прав доступа вам нужно создать заявку и пройти проверку. После этих шагов вы получите доступ к системе и сможете вести свой бизнес еще продуктивнее',
   },
@@ -80,7 +68,7 @@ const data = [
   },
   {
     head: 'Удобно',
-    img: comfImg,
+    img: fastImg,
     description:
       'Удаленное хранилище данных позволит Вам получить доступ к системе из любой точки планеты. Нет необходимости в специализированных устройствах.',
   },
@@ -116,12 +104,19 @@ export default function Home() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                    Launch App
-                  </Button>
+                  <Link href="/login">
+                    <Button variant="contained" color="primary">
+                      Launch App
+                    </Button>
+                  </Link>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    href="https://github.com/MrRaiter/hukatonFront"
+                    target="_blank"
+                  >
                     Our GitHub
                   </Button>
                 </Grid>
@@ -145,7 +140,9 @@ export default function Home() {
                   >
                     {data[0].head}
                   </Typography>
-                  <Typography align="right">{data[0].description}</Typography>
+                  <Typography align="right" color="textSecondary">
+                    {data[0].description}
+                  </Typography>
                 </div>
               </div>
             </Grid>
@@ -160,7 +157,9 @@ export default function Home() {
                   >
                     {data[1].head}
                   </Typography>
-                  <Typography align="left">{data[1].description}</Typography>
+                  <Typography align="left" color="textSecondary">
+                    {data[1].description}
+                  </Typography>
                 </div>
                 <div className="img-block">
                   <img className="card-img" src={data[1].img} alt="" />
@@ -181,29 +180,15 @@ export default function Home() {
                   >
                     {data[2].head}
                   </Typography>
-                  <Typography align="right">{data[2].description}</Typography>
+                  <Typography align="right" color="textSecondary">
+                    {data[2].description}
+                  </Typography>
                 </div>
               </div>
             </Grid>
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        >
-          Все права и т.д.....
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
     </>
   );
 }
