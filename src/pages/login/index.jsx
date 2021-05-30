@@ -95,7 +95,7 @@ const LoginPage = () => {
     <div id="auth-container">
       <div id="auth-card">
         <div className="card-shadow">
-          <div id="image-section">
+          <div id="image-section" style={{ padding: 20 }}>
             <img src={LoginImage} alt="Login" />
           </div>
           <div id="form-section">

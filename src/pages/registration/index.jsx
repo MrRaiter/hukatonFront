@@ -7,6 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
+import { Button, Typography } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from 'axios';
 import SignUpImage from '../../assets/images/register.svg';
@@ -102,79 +103,68 @@ const SignUp = () => {
     <div id="auth-container">
       <div id="auth-card">
         <div className="card-shadow">
-          <div id="image-section">
+          <div id="image-section" style={{ padding: 20 }}>
             <img src={SignUpImage} alt="Login" />
           </div>
-          <div id="form-section">
-            <h4>Registration</h4>
+          <div id="form-section" style={{ paddingTop: 20, paddingBottom: 10 }}>
+            <Typography align="center" variant="h6">
+              Sign up
+            </Typography>
 
-            <form onSubmit={submitHanlder}>
-              <div className="input-field mb-1">
-                <input
-                  placeholder="First name"
-                  name="firstname"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="input-field mb-1">
-                <input
-                  placeholder="Last name"
-                  name="lastname"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="input-field mb-1">
-                {emailDirty && emailError && (
-                  <div style={{ color: 'red' }}>{emailError}</div>
+            <form
+              onSubmit={submitHanlder}
+              className="authForm"
+              style={{ minWidth: 350, gap: 5 }}
+            >
+              <TextField id="name" label="Name" />
+
+              <TextField id="lastname" label="Last Name" />
+
+              <TextField id="email" label="Email" type="email" />
+
+              <TextField id="password" label="Password" type="password" />
+              <TextField
+                id="repeat_password"
+                label="Repeat Password"
+                type="password"
+              />
+
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                options={companies}
+                getOptionLabel={(option) => option.title}
+                onChange={(event, newValue) => {
+                  setUser({ ...user, company_id: newValue.id });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    // eslint-disable-next-line react/jsx-props-no-spreading
+                    {...params}
+                    label="Find your company"
+                    margin="normal"
+                    variant="outlined"
+                    InputProps={{ ...params.InputProps, type: 'search' }}
+                    style={{ marginTop: 30 }}
+                  />
                 )}
-                <input
-                  onBlur={(e) => blurHandle(e)}
-                  placeholder="Email"
-                  name="email"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="input-field mb-2">
-                {PasswordDirty && PasswordDirty && (
-                  <div style={{ color: 'red' }}>{passwordError}</div>
-                )}
-                <input
-                  onBlur={(e) => blurHandle(e)}
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="input-field mb-2">
-                <Autocomplete
-                  freeSolo
-                  id="free-solo-2-demo"
-                  disableClearable
-                  options={companies}
-                  getOptionLabel={(option) => option.title}
-                  onChange={(event, newValue) => {
-                    setUser({ ...user, company_id: newValue.id });
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...params}
-                      label="Search input"
-                      margin="normal"
-                      variant="outlined"
-                      InputProps={{ ...params.InputProps, type: 'search' }}
-                    />
-                  )}
-                />
-              </div>
-              <button>Register</button>
+              />
+
+              <Button
+                className="loginButton"
+                variant="contained"
+                type="submit"
+                color="primary"
+              >
+                Sign up
+              </Button>
             </form>
 
             <p className="redirect">
               Already have an account?
               {'  '}
-              <Link to="/login" style={{ marginLeft: '5px' }}>
+              <Link to="/login" style={{ marginLeft: '5px', color: '#222273' }}>
                 Login
               </Link>
             </p>
