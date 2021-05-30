@@ -5,6 +5,7 @@ import { NotificationManager } from 'react-notifications';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import 'react-notifications/lib/notifications.css';
+import { Button, TextField, Typography } from '@material-ui/core';
 import LoginImage from '../../assets/images/login.svg';
 import './auth.scss';
 
@@ -98,41 +99,26 @@ const LoginPage = () => {
             <img src={LoginImage} alt="Login" />
           </div>
           <div id="form-section">
-            <h4>Welcome back</h4>
+            <Typography align="center" variant="h6" style={{ marginTop: 20 }}>Welcome back</Typography>
 
-            <form onSubmit={submitHanlder}>
-              <div className="input-field mb-1">
-                {emailDirty && emailError && (
-                  <div style={{ color: 'red' }}>{emailError}</div>
-                )}
-                <input
-                  onBlur={(e) => blurHandle(e)}
-                  placeholder="Login"
-                  name="email"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="input-field mb-2">
-                {PasswordDirty && PasswordDirty && (
-                  <div style={{ color: 'red' }}>{passwordError}</div>
-                )}
+            <form onSubmit={submitHanlder} className="authForm">
 
-                <input
-                  onBlur={(e) => blurHandle(e)}
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                  onChange={inputHandler}
-                />
-              </div>
-              <button disabled={!isFormValid} type="submit">
+              <TextField id="name" label="Email" />
+
+              <TextField
+                id="password"
+                label="Password"
+                type="password"
+              />
+
+              <Button className="loginButton" variant="contained" type="submit" color="primary">
                 Login
-              </button>
+              </Button>
             </form>
 
             <p className="redirect">
               Don&apos;t have an account?
-              <Link to="/signup" style={{ marginLeft: '5px' }}>
+              <Link to="/signup" style={{ marginLeft: '10px', color: '#222273' }}>
                 Register
               </Link>
             </p>
