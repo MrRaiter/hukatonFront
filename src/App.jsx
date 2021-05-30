@@ -7,6 +7,7 @@ import AddCompany from './pages/add-company';
 import RegistrationPage from './pages/registration';
 import PrivateRoute from './components/private-route';
 import Dashboard from './pages/dashboard';
+import OrderPage from './pages/order';
 
 import './App.scss';
 
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/signup" component={RegistrationPage} />
           <Route exact path="/add-company" component={AddCompany} />
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/orders/:id" component={OrderPage} />
         </Switch>
       </Router>
     </div>
