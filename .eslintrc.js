@@ -4,7 +4,6 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:prettier/recommended',
     'plugin:react/recommended',
     'airbnb',
   ],
