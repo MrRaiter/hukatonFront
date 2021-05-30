@@ -103,15 +103,16 @@ const LoginPage = () => {
 
             <form onSubmit={submitHanlder} className="authForm" style={{ gap: 10 }}>
 
-              <TextField id="name" label="Email" />
+              <TextField id="name" label="Email" name="email" onChange={inputHandler} />
 
               <TextField
+                name="password"
                 id="password"
                 label="Password"
                 type="password"
               />
 
-              <Button className="loginButton" variant="contained" type="submit" color="primary">
+              <Button className="loginButton" variant="contained" type="submit" color="primary" onChange={inputHandler}>
                 Login
               </Button>
             </form>

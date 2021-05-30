@@ -28,6 +28,7 @@ import ModalContract from '../../components/modal-contract';
 
 import styles from './Profile.module.scss';
 import ContractCard from '../../components/contract-card';
+import { companies } from '../../constants/companies';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
 const ProfilePage = ({ history }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [company, setCompany] = useState(null);
+  const [company, setCompany] = useState(companies[1]);
   const { id } = useParams();
 
   const classes = useStyles();
@@ -111,7 +112,7 @@ const ProfilePage = ({ history }) => {
     <div style={{ minHeight: '100vh' }}>
       <Paper
         className={classes.mainFeaturedPost}
-        style={{ backgroundImage: `url(${company?.image || 'https://cdn.hevcars.com.ua/wp-content/uploads/2017/05/tesla-model-s-2017-banner-hevcars-04.jpg'})` }}
+        style={{ backgroundImage: `url(${company?.image_banner || 'https://cdn.hevcars.com.ua/wp-content/uploads/2017/05/tesla-model-s-2017-banner-hevcars-04.jpg'})` }}
       >
         {/* Increase the priority of the hero background image */}
         <img
@@ -128,13 +129,13 @@ const ProfilePage = ({ history }) => {
               <div className={styles.TopInfo}>
                 {/* <Link href={`/companies/${order.publisher.id}`}> */}
                 <div className={styles.CompanyCard}>
-                  <Avatar variant="square" src={company?.logo || 'https://cdn.iconscout.com/icon/free/png-512/tesla-14-892143.png'} />
+                  <Avatar variant="square" src={company?.image_logo || 'https://cdn.iconscout.com/icon/free/png-512/tesla-14-892143.png'} style={{ objectFit: 'contain' }} />
                   <Typography
                     variant="h6"
                     color="textPrimary"
                     className={styles.CompanyName}
                   >
-                    {company?.name || 'Tesla Inc'}
+                    {company?.company_name || 'Tesla Inc'}
                   </Typography>
                 </div>
                 <div>
