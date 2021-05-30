@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderPage = () => {
   const classes = useStyles();
   const { id } = useParams();
-  const order = contracts[0];
+  const order = contracts.find((contract) => contract.id === id);
   const handleDownload = (e) => {
     console.log('Download');
   };
@@ -101,7 +101,7 @@ const OrderPage = () => {
           <div className={styles.TopBanner}>
             <div className={styles.Content}>
               <div className={styles.TopInfo}>
-                <Link href={`/companies/${order.publisher.id}`}>
+                <Link href={`/companies/${order.company_id}`}>
                   <div className={styles.CompanyCard}>
                     <Avatar variant="square" src={order.publisher.image} />
                     <Typography
