@@ -43,6 +43,7 @@ function App() {
             <Route exact path="/add-company" component={AddCompany} />
             <Route exact path="/dashboard" component={ProfilePage} />
             <Route exact path="/companies" component={Companies} />
+            <Route path="/contracts" component={ContractsPage} />
             <Route
               exact
               path="/dashboard/contracts"

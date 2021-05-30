@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-lone-blocks */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
@@ -10,12 +12,21 @@ import CardMedia from '@material-ui/core/CardMedia';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useParams } from 'react-router';
 import IconButton from '@material-ui/core/IconButton';
-import { Box, Container, Typography } from '@material-ui/core';
+import {
+  Box, Container, Typography,
+  Avatar,
+  Chip,
+  Divider,
+  Grid,
+  Paper,
+} from '@material-ui/core';
 import ModalContract from '../../components/modal-contract';
-import './profile.scss';
 
-const useStyles = makeStyles({
+import styles from './Profile.module.scss';
+
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%',
     display: 'flex',
@@ -44,20 +55,48 @@ const useStyles = makeStyles({
     margin: 0,
   },
   field: {
-    marginBottom: '5px',
     fontSize: '14px',
+    padding: '0px 10px',
     display: 'flex',
     alignItems: 'flex-start',
   },
   value: {
     marginLeft: '10px',
   },
-});
+  mainFeaturedPost: {
+    minHeight: 350,
+    position: 'relative',
+    backgroundColor: theme.palette.grey[800],
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(4),
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: 'rgba(0,0,0,.35)',
+  },
+  mainFeaturedPostContent: {
+    position: 'relative',
+    padding: theme.spacing(3),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(6),
+      paddingRight: 0,
+    },
+  },
+}));
 
 const ProfilePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contract, setContract] = useState({});
   const [company, setCompany] = useState(null);
+  const { id } = useParams();
 
   const handleChangeContract = (e) => {
     setContract({ ...contract, [e.target.name]: e.target.value });
@@ -65,115 +104,137 @@ const ProfilePage = () => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.root} maxWidth="lg">
-      <Card className={classes.card} variant="outlined">
-        <CardMedia
-          className={classes.media}
-          image={company?.image || 'https://onminecraft.ru/files/2012/03/iron-ingot.png'}
-          title="Contract Image"
+    <>
+      <Paper
+        className={classes.mainFeaturedPost}
+        style={{ backgroundImage: `url(${company?.image || 'https://cdn.hevcars.com.ua/wp-content/uploads/2017/05/tesla-model-s-2017-banner-hevcars-04.jpg'})` }}
+      >
+        {/* Increase the priority of the hero background image */}
+        <img
+          style={{ display: 'none' }}
+          src={company?.image}
+          alt={company?.imageText}
         />
-        <CardContent>
-          <div className={classes.header}>
-            <Typography className={classes.companyTitle} gutterBottom>
-              {company?.title || 'Title'}
-            </Typography>
-            <Tooltip title="Add Contract">
-              <IconButton>
-                <AddCircleOutlineIcon />
-              </IconButton>
-            </Tooltip>
+        <div className={classes.overlay} />
+      </Paper>
+      <Container maxWidth="md">
+        <section>
+          <div className={styles.TopBanner}>
+            <div className={styles.Content}>
+              <div className={styles.TopInfo}>
+                {/* <Link href={`/companies/${order.publisher.id}`}> */}
+                <div className={styles.CompanyCard}>
+                  <Avatar variant="square" src={company?.logo || 'https://cdn.iconscout.com/icon/free/png-512/tesla-14-892143.png'} />
+                  <Typography
+                    variant="h6"
+                    color="textPrimary"
+                    className={styles.CompanyName}
+                  >
+                    {company?.name || 'Tesla Inc'}
+                  </Typography>
+                </div>
+                {/* </Link> */}
+              </div>
+              <div className={classes.field}>
+                <Typography className={classes.title} color="textSecondary">
+                  INN:
+                </Typography>
+                <Typography variant="body2" className={classes.value} component="p">
+                  {company?.inn || '233232'}
+                </Typography>
+              </div>
+              <div className={classes.field}>
+                <Typography className={classes.title} color="textSecondary">
+                  Phone:
+                </Typography>
+                <Typography variant="body2" className={classes.value} component="p">
+                  {company?.phone || '12312'}
+                </Typography>
+              </div>
+              <div className={classes.field}>
+                <Typography className={classes.title} color="textSecondary">
+                  Email:
+                </Typography>
+                <Typography variant="body2" className={classes.value} component="p">
+                  {company?.email || 'qweqwe@gmail.com'}
+                </Typography>
+              </div>
+              <Typography
+                className={styles.Description}
+                variant="body1"
+                align="justify"
+                style={{ whiteSpace: 'pre-wrap' }}
+              >
+                {company?.description || '    Tesla, Inc. is an American electric vehicle and clean energy company based in Palo Alto, California. Tesla`s current products include electric cars, battery energy storage from home to grid-scale, solar panels and solar roof tiles, as well as other related products and services. In 2020, Tesla had the highest sales in the plug-in and battery electric passenger car segments, capturing 16% of the plug-in market (which includes plug-in hybrids) and 23% of the battery-electric (purely electric) market. Through its subsidiary Tesla Energy, the company develops and is a major installer of solar photovoltaic energy generation systems in the United States. Tesla Energy is also one of the largest global suppliers of battery energy storage systems, with 3 GWh of battery storage supplied in 2020.'}
+              </Typography>
+            </div>
           </div>
-          <div className={classes.field}>
-            <Typography className={classes.title} color="textSecondary">
-              INN:
-            </Typography>
-            <Typography variant="body2" className={classes.value} component="p">
-              {company?.inn || '233232'}
-            </Typography>
-          </div>
-          <div className={classes.field}>
-            <Typography className={classes.title} color="textSecondary">
-              Phone:
-            </Typography>
-            <Typography variant="body2" className={classes.value} component="p">
-              {company?.phone || '12312'}
-            </Typography>
-          </div>
-          <div className={classes.field}>
-            <Typography className={classes.title} color="textSecondary">
-              Email:
-            </Typography>
-            <Typography variant="body2" className={classes.value} component="p">
-              {company?.email || 'qweqwe@gmail.com'}
-            </Typography>
-          </div>
-          <div className={classes.field}>
-            <Typography className={classes.title} color="textSecondary">
-              Description:
-            </Typography>
-            <Typography variant="body2" className={classes.value} component="p">
-              {company?.description || 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,'}
-            </Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </Container>
-    // <div className="container">
-    //   <div className="header">
-    //     <div className="left-block">
-    //       <div className="company-name-header">
-    //         <div className="company-name">
-    //           <div className="logo">
-    //             <img
-    //               src="http://www.gidrolast.ru/wp-content/uploads/2015/09/4-150x150.jpg"
-    //               alt="Logo"
-    //             />
-    //           </div>
-    //           <div className="name">TMK</div>
-    //         </div>
-    //       </div>
-    //       <div className="info">
-    //         <div className="info-field">
-    //           <div className="label">Phone:</div>
-    //           <div className="value">545659956565</div>
-    //         </div>
-    //         <div className="info-field">
-    //           <div className="label">Email:</div>
-    //           <div className="value">545659956565</div>
-    //         </div>
-    //         <div className="info-field">
-    //           <div className="label">INN:</div>
-    //           <div className="value">545659956565</div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //     <div className="right-block">
-    //       <div className="add-btn">
-    //         <button className="btn" onClick={() => setIsModalOpen(true)}>
-    //           Add Contract
-    //         </button>
-    //       </div>
-    //       <div className="description">
-    //         Lorem Ipsum is simply dummy text of the printing and typesetting
-    //         industry. Lorem Ipsum has been the industry&apos;s standard dummy
-    //         text ever since the 1500s, when an unknown printer took a galley of
-    //         type and scrambled it to make a type specimen book. It has survived
-    //         not only five centuries, but also the leap into electronic
-    //         typesetting, remaining essentially unchanged. It was popularised in
-    //         the 1960s with the release of Letraset sheets containing Lorem Ipsum
-    //         passages, and more recently with desktop publishing software like
-    //         Aldus PageMaker including versions of Lorem Ipsum.
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <ModalContract
-    //     handleOpen={setIsModalOpen}
-    //     open={isModalOpen}
-    //     headerText="Add contract"
-    //     inputHandler={handleChangeContract}
-    //   />
-    // </div>
+        </section>
+      </Container>
+
+    </>
   );
 };
 
 export default ProfilePage;
+
+{ /* <Container className={classes.root} maxWidth="lg">
+        <Card className={classes.card} variant="outlined">
+          <CardMedia
+            className={classes.media}
+            image={company?.image || 'https://onminecraft.ru/files/2012/03/iron-ingot.png'}
+            title="Contract Image"
+          />
+          <CardContent>
+            <div className={classes.header}>
+              <Typography className={classes.companyTitle} gutterBottom>
+                {company?.title || 'Title'}
+              </Typography>
+              <Tooltip title="Add Contract">
+                <IconButton>
+                  <AddCircleOutlineIcon />
+                </IconButton>
+              </Tooltip>
+            </div>
+            <div className={classes.field}>
+              <Typography className={classes.title} color="textSecondary">
+                INN:
+              </Typography>
+              <Typography variant="body2" className={classes.value} component="p">
+                {company?.inn || '233232'}
+              </Typography>
+            </div>
+            <div className={classes.field}>
+              <Typography className={classes.title} color="textSecondary">
+                Phone:
+              </Typography>
+              <Typography variant="body2" className={classes.value} component="p">
+                {company?.phone || '12312'}
+              </Typography>
+            </div>
+            <div className={classes.field}>
+              <Typography className={classes.title} color="textSecondary">
+                Email:
+              </Typography>
+              <Typography variant="body2" className={classes.value} component="p">
+                {company?.email || 'qweqwe@gmail.com'}
+              </Typography>
+            </div>
+            <div className={classes.field}>
+              <Typography className={classes.title} color="textSecondary">
+                Description:
+              </Typography>
+              <Typography variant="body2" className={classes.value} component="p">
+                {company?.description || 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,'}
+              </Typography>
+            </div>
+          </CardContent>
+        </Card>
+        <ModalContract
+          handleOpen={setIsModalOpen}
+          open={isModalOpen}
+          headerText="Add contract"
+          inputHandler={handleChangeContract}
+        />
+      </Container>
+     */ }
