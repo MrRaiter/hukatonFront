@@ -101,7 +101,7 @@ const LoginPage = () => {
           <div id="form-section">
             <Typography align="center" variant="h6" style={{ marginTop: 20 }}>Welcome back</Typography>
 
-            <form onSubmit={submitHanlder} className="authForm">
+            <form onSubmit={submitHanlder} className="authForm" style={{ gap: 10 }}>
 
               <TextField id="name" label="Email" />
 
