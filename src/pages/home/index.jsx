@@ -16,15 +16,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import './home.css';
+import { Slide, useScrollTrigger } from '@material-ui/core';
 import fastImg from '../../assets/images/fast.png';
 import simpImg from '../../assets/images/simp.png';
 import comfImg from '../../assets/images/comf.png';
+import NavBar from '../../components/top-nav-bar';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
   heroContent: {
+    marginTop: 80,
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
@@ -74,6 +77,20 @@ const data = [
   },
 ];
 
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
 export default function Home() {
   const classes = useStyles();
 
@@ -81,6 +98,9 @@ export default function Home() {
     <>
       <main>
         {/* Hero unit */}
+        <HideOnScroll>
+          <NavBar />
+        </HideOnScroll>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
@@ -98,8 +118,8 @@ export default function Home() {
               color="textSecondary"
               paragraph
             >
-              Система тендеров, с возможностью слежения за поставками....и т.д.
-              красивый текст
+              Система тендеров, с возможностью отслеживания поставок, контроля
+              исполнения заказов и оценки компаний
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
