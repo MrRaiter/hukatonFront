@@ -1,15 +1,19 @@
+/* eslint-disable import/order */
 /* eslint-disable consistent-return */
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NotificationManager } from 'react-notifications';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import { AuthContext } from '../../context/index';
 import axios from 'axios';
 import 'react-notifications/lib/notifications.css';
+
 import { Button, TextField, Typography } from '@material-ui/core';
 import LoginImage from '../../assets/images/login.svg';
 import './auth.scss';
 
 const LoginPage = () => {
+  const { isLoggedIn, postLogin } = useContext(AuthContext);
   const [emailDirty, setEmaiDirty] = useState(false);
   const [PasswordDirty, setPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState('Email is empty !');
@@ -63,34 +67,17 @@ const LoginPage = () => {
     }
   };
 
-  const setTokens = (data) => {
-    localStorage.setItem('token', JSON.stringify(data.authorization));
-    localStorage.setItem('user', JSON.stringify(data.user));
-    // setAuthTokens({ token: data.authorization, user: data.user });
-  };
-  const defaultAxios = async (data) => {
-    const { authorization } = data;
-
-    axios.defaults.headers.common.authorization = authorization
-      ? JSON.parse(`"${authorization}"`)
-      : '';
-  };
   const submitHanlder = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND}login`, user,
-      );
-      if (response) {
-        setTokens(response.data);
-        defaultAxios(response.data);
-        history.push('/profile');
-      }
+      await postLogin(user);
     } catch (error) {
       NotificationManager.error('Error');
     }
   };
-
+  if (isLoggedIn) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <div id="auth-container">
       <div id="auth-card">
@@ -103,13 +90,15 @@ const LoginPage = () => {
 
             <form onSubmit={submitHanlder} className="authForm" style={{ gap: 10 }}>
 
-              <TextField id="name" label="Email" name="email" onChange={inputHandler} />
+              <TextField id="name" label="Email" type="email" name="email" onChange={inputHandler} />
 
               <TextField
                 name="password"
                 id="password"
                 label="Password"
                 type="password"
+                name="password"
+                onChange={inputHandler}
               />
 
               <Button className="loginButton" variant="contained" type="submit" color="primary" onChange={inputHandler}>

@@ -4,17 +4,19 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable operator-linebreak */
 /* eslint-disable indent */
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { Button, Typography } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from 'axios';
+import { AuthContext } from '../../context/index';
 import SignUpImage from '../../assets/images/register.svg';
 
 import '../login/auth.scss';
 
 const SignUp = () => {
+  const { isLoggedIn, signUp } = useContext(AuthContext);
   const [emailDirty, setEmaiDirty] = useState(false);
   const [PasswordDirty, setPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState('Email is empty !');
@@ -87,17 +89,11 @@ const SignUp = () => {
   };
   const submitHanlder = async (e) => {
     e.preventDefault();
-
-    const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND}signup`,
-      user
-    );
-    if (response) {
-      setTokens(response.data);
-      defaultAxios(response.data);
-      history.push('/profile');
-    }
+    await signUp(user);
   };
+  if (isLoggedIn) {
+    return <Redirect to="/notes" />;
+  }
 
   return (
     <div id="auth-container">
@@ -116,17 +112,41 @@ const SignUp = () => {
               className="authForm"
               style={{ minWidth: 350, gap: 5 }}
             >
-              <TextField id="name" label="Name" />
+              <TextField
+                id="name"
+                label="Name"
+                name="firstname"
+                onChange={inputHandler}
+              />
 
-              <TextField id="lastname" label="Last Name" />
+              <TextField
+                id="lastname"
+                label="Last Name"
+                name="lastname"
+                onChange={inputHandler}
+              />
 
-              <TextField id="email" label="Email" type="email" />
+              <TextField
+                id="email"
+                label="Email"
+                type="email"
+                name="email"
+                onChange={inputHandler}
+              />
 
-              <TextField id="password" label="Password" type="password" />
+              <TextField
+                id="password"
+                label="Password"
+                type="password"
+                name="password"
+                onChange={inputHandler}
+              />
               <TextField
                 id="repeat_password"
                 label="Repeat Password"
                 type="password"
+                name="password"
+                onChange={inputHandler}
               />
 
               <Autocomplete
