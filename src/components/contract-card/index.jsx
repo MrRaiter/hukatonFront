@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   media: {
     height: 140,
   },
+  description: {
+    lineClamp: 5,
+  },
 });
 
 export default function ContractCard({
@@ -34,8 +37,14 @@ export default function ContractCard({
         <Typography gutterBottom variant="h5" component="h2">
           {title}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {description}
+        <Typography
+          className={classes.description}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
+          {description.split(' ').slice(0, 20).join(' ')}
+          ...
         </Typography>
       </CardContent>
 

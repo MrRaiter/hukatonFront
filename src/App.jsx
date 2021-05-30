@@ -11,6 +11,7 @@ import ContractsPage from './pages/contracts';
 import ProfilePage from './pages/profile';
 import Dashboard from './pages/dashboard';
 import Companies from './pages/companies';
+import OrderPage from './pages/order';
 
 import './App.scss';
 
@@ -47,6 +48,7 @@ function App() {
               path="/dashboard/contracts"
               component={ContractsPage}
             />
+            <Route exact path="/orders/:id" component={OrderPage} />
           </Switch>
         </div>
       </Router>
