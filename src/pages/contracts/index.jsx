@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -21,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 const ContractsPage = () => (
   <Container maxWidth="lg">
     <Box my={4}>
-      <Typography variant="h2">Orders</Typography>
+      <Typography variant="h2">
+        {location.pathname.includes('orders') ? 'Orders' : 'Contracts'}
+      </Typography>
     </Box>
     <Box my={4}>
       <Grid container spacing={4} alignContent="center">

@@ -37,7 +37,7 @@ export default function ButtonAppBar() {
             </MenuItem>
             <MenuItem>
               Orders
-              <Link to="/dashboard" />
+              <Link to="/dashboard/orders" />
             </MenuItem>
           </SubMenu>
         </Menu>

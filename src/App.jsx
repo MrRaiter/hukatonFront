@@ -51,6 +51,7 @@ function App() {
               path="/dashboard/contracts"
               component={ContractsPage}
             />
+            <Route exact path="/dashboard/orders" component={ContractsPage} />
             <Route exact path="/orders/:id" component={OrderPage} />
           </Switch>
         </div>
