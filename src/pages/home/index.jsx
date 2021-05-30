@@ -98,9 +98,9 @@ export default function Home() {
     <>
       <main>
         {/* Hero unit */}
-        <HideOnScroll>
-          <NavBar />
-        </HideOnScroll>
+
+        <NavBar />
+
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography

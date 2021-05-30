@@ -8,6 +8,9 @@ import App from './App';
 
 const theme = createMuiTheme({
   palette: {
+    primary: {
+      main: '#007cc7',
+    },
     secondary: {
       main: green[500],
     },
@@ -18,5 +21,5 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <App />
   </ThemeProvider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
