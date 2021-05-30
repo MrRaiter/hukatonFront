@@ -19,28 +19,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContractsPage = () => (
-  <Container maxWidth="lg">
-    <Box my={4}>
-      <Typography variant="h2">
-        {location.pathname.includes('orders') ? 'Orders' : 'Contracts'}
-      </Typography>
-    </Box>
-    <Box my={4}>
-      <Grid container spacing={4} alignContent="center">
-        {contracts.map((contract) => (
-          <Grid item xs={4}>
-            <ContractCard
-              image={contract.image}
-              title={contract.title}
-              description={contract.description}
-              buttonTitle="Read Full Overview"
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  </Container>
-);
+const ContractsPage = ({ history }) => {
+  const handleClick = (id) => {
+    history.push(`/orders/${id}`);
+  };
+
+  return (
+    <Container maxWidth="lg" style={{ minHeight: '100vh' }}>
+      <Box my={4}>
+        <Typography variant="h2">
+          {location.pathname.includes('orders') ? 'Orders' : 'Contracts'}
+        </Typography>
+      </Box>
+      <Box my={4}>
+        <Grid container spacing={4} alignContent="center">
+          {contracts.map((contract) => (
+            <Grid item xs={4}>
+              <ContractCard
+                image={contract.image}
+                title={contract.title}
+                description={contract.description}
+                buttonTitle="Read Full Overview"
+                onClick={() => handleClick(contract.id)}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Container>
+  );
+};
 
 export default ContractsPage;

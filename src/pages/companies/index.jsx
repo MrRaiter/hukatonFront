@@ -21,7 +21,7 @@ const Companies = () => {
     getApi();
   }, []);
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" style={{ minHeight: '100vh' }}>
       <Box my={4}>
         <Typography variant="h2">Companies</Typography>
       </Box>

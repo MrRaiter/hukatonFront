@@ -104,7 +104,7 @@ const ProfilePage = () => {
   const classes = useStyles();
 
   return (
-    <>
+    <div style={{ minHeight: '100vh' }}>
       <Paper
         className={classes.mainFeaturedPost}
         style={{ backgroundImage: `url(${company?.image || 'https://cdn.hevcars.com.ua/wp-content/uploads/2017/05/tesla-model-s-2017-banner-hevcars-04.jpg'})` }}
@@ -172,7 +172,7 @@ const ProfilePage = () => {
         </section>
       </Container>
 
-    </>
+    </div>
   );
 };
 
