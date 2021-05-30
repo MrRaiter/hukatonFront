@@ -13,6 +13,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from 'react-router';
+import StarIcon from '@material-ui/icons/Star';
 import IconButton from '@material-ui/core/IconButton';
 import {
   Box, Container, Typography,
@@ -22,9 +23,11 @@ import {
   Grid,
   Paper,
 } from '@material-ui/core';
+import { contracts } from '../../constants/contracts';
 import ModalContract from '../../components/modal-contract';
 
 import styles from './Profile.module.scss';
+import ContractCard from '../../components/contract-card';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     padding: '0px 10px',
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   value: {
     marginLeft: '10px',
@@ -92,16 +95,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfilePage = () => {
+const ProfilePage = ({ history }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [contract, setContract] = useState({});
+
   const [company, setCompany] = useState(null);
   const { id } = useParams();
 
-  const handleChangeContract = (e) => {
-    setContract({ ...contract, [e.target.name]: e.target.value });
-  };
   const classes = useStyles();
+
+  const handleClick = (contractId) => {
+    history.push(`/orders/${contractId}`);
+  };
 
   return (
     <div style={{ minHeight: '100vh' }}>
@@ -133,32 +137,45 @@ const ProfilePage = () => {
                     {company?.name || 'Tesla Inc'}
                   </Typography>
                 </div>
+                <div>
+                  <div className={styles.Stars}>
+                    <StarIcon className={styles['Star--active']} />
+                    <StarIcon className={styles['Star--active']} />
+                    <StarIcon className={styles['Star--active']} />
+                    <StarIcon className={styles['Star--active']} />
+                    <StarIcon />
+                  </div>
+                  <Typography align="right" variant="body1" color="textSecondary">1295 reviews</Typography>
+                </div>
                 {/* </Link> */}
               </div>
-              <div className={classes.field}>
-                <Typography className={classes.title} color="textSecondary">
-                  INN:
-                </Typography>
-                <Typography variant="body2" className={classes.value} component="p">
-                  {company?.inn || '233232'}
-                </Typography>
-              </div>
-              <div className={classes.field}>
-                <Typography className={classes.title} color="textSecondary">
-                  Phone:
-                </Typography>
-                <Typography variant="body2" className={classes.value} component="p">
-                  {company?.phone || '12312'}
-                </Typography>
-              </div>
-              <div className={classes.field}>
-                <Typography className={classes.title} color="textSecondary">
-                  Email:
-                </Typography>
-                <Typography variant="body2" className={classes.value} component="p">
-                  {company?.email || 'qweqwe@gmail.com'}
-                </Typography>
-              </div>
+              <Paper style={{ padding: 10, marginTop: 20, marginBottom: 60 }}>
+                <div className={classes.field}>
+                  <Typography className={classes.title} color="textSecondary">
+                    INN:
+                  </Typography>
+                  <Typography variant="body2" className={classes.value} component="p">
+                    {company?.inn || '233232'}
+                  </Typography>
+                </div>
+                <div className={classes.field}>
+                  <Typography className={classes.title} color="textSecondary">
+                    Phone:
+                  </Typography>
+                  <Typography variant="body2" className={classes.value} component="p">
+                    {company?.phone || '12312'}
+                  </Typography>
+                </div>
+                <div className={classes.field}>
+                  <Typography className={classes.title} color="textSecondary">
+                    Email:
+                  </Typography>
+                  <Typography variant="body2" className={classes.value} component="p">
+                    {company?.email || 'qweqwe@gmail.com'}
+                  </Typography>
+                </div>
+              </Paper>
+
               <Typography
                 className={styles.Description}
                 variant="body1"
@@ -167,6 +184,23 @@ const ProfilePage = () => {
               >
                 {company?.description || '    Tesla, Inc. is an American electric vehicle and clean energy company based in Palo Alto, California. Tesla`s current products include electric cars, battery energy storage from home to grid-scale, solar panels and solar roof tiles, as well as other related products and services. In 2020, Tesla had the highest sales in the plug-in and battery electric passenger car segments, capturing 16% of the plug-in market (which includes plug-in hybrids) and 23% of the battery-electric (purely electric) market. Through its subsidiary Tesla Energy, the company develops and is a major installer of solar photovoltaic energy generation systems in the United States. Tesla Energy is also one of the largest global suppliers of battery energy storage systems, with 3 GWh of battery storage supplied in 2020.'}
               </Typography>
+              <Divider style={{ marginTop: 30 }} />
+              <Box my={8}>
+                <Typography variant="h5" style={{ marginBottom: 20 }}>Top contracts by revenue</Typography>
+                <Grid container spacing={4} alignContent="center">
+                  {contracts.slice(0, 3).map((contract) => (
+                    <Grid item xs={4}>
+                      <ContractCard
+                        image={contract.image}
+                        title={contract.title}
+                        description={contract.description}
+                        buttonTitle="Read Full Overview"
+                        onClick={() => handleClick(contract.id)}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
             </div>
           </div>
         </section>
