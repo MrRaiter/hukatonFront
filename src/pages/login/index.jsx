@@ -97,7 +97,6 @@ const LoginPage = () => {
                 id="password"
                 label="Password"
                 type="password"
-                name="password"
                 onChange={inputHandler}
               />
 
