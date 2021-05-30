@@ -196,6 +196,7 @@ const ProfilePage = ({ history }) => {
                         description={contract.description}
                         buttonTitle="Read Full Overview"
                         onClick={() => handleClick(contract.id)}
+                        style={{ height: '100%' }}
                       />
                     </Grid>
                   ))}
